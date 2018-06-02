@@ -18,8 +18,11 @@ Um cache em processo parece ser uma opção melhor para um número pequeno e pre
 Para um número pequeno e previsível de objetos de preferência imutáveis que precisam ser lidos várias vezes, um cache em processo é uma boa solução, porque ele terá um desempenho melhor do que um cache distribuído.
 
 # Processamento
+
 Foi utilizado este código abaixo para simular o tempo de resposta de um serviço:
-<img src="https://github.com/nogueirawagner/in-memory-cache/blob/master/Results/processamento.jpg" alt="" />
+<img src="https://github.com/nogueirawagner/in-memory-cache/blob/master/Results/Processamento.jpg" alt="" />
+
+# Resultados:
 
 <table style="float: left;">
 <tbody>
