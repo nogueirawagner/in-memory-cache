@@ -8,3 +8,4 @@ Performance usando memory cache
 <p style="padding-left: 30px;"><img src="https://github.com/nogueirawagner/in-memory-cache/blob/master/Results/GetOrCreate_2.jpg" alt="" /></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+ 
