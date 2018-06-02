@@ -9,7 +9,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace InMemoryCache.Controllers
 {
-  
+
 
   [Produces("application/json")]
   [Route("api/cache")]
@@ -22,7 +22,36 @@ namespace InMemoryCache.Controllers
       _cache = cache;
     }
 
-    // GET: api/Cache
+    [HttpGet]
+    [AllowAnonymous]
+    [Route("TryGetValue")]
+    public IActionResult TryGetValue()
+    {
+      DateTime data;
+
+      if (!_cache.TryGetValue("Data", out data))
+      {
+        data = DateTime.Now;
+
+        int valor = 9999;
+        int i = 0;
+        while (i < valor)
+          i++;
+
+        var cacheEntryOptions = new MemoryCacheEntryOptions()
+          .SetSlidingExpiration(TimeSpan.FromDays(1)); // Mantém no cache por este tempo, redefina o tempo se for acessado.
+
+        _cache.Set("Data", data, cacheEntryOptions);
+      }
+
+      var ret = new
+      {
+        ValorCache = data,
+        DataAtual = DateTime.Now
+      };
+      return Response(ret);
+    }
+
     [HttpGet]
     [AllowAnonymous]
     [Route("GetOrCreate")]
@@ -30,15 +59,12 @@ namespace InMemoryCache.Controllers
     {
       var cacheGet = _cache.GetOrCreate("Data", entry =>
       {
-        double valor = 99999;
+        double valor = 9999;
         double i = 0;
         while (i < valor)
-        {
           i++;
-        }
 
         entry.SlidingExpiration = TimeSpan.FromDays(1);
-
         return Response(DateTime.Now);
       });
 
@@ -49,6 +75,31 @@ namespace InMemoryCache.Controllers
       };
 
       return Response(ret);
+    }
+
+    [HttpGet]
+    [AllowAnonymous]
+    [Route("GetOrCreateAsync")]
+    public Task<IActionResult> GetOrCreateAsync()
+    {
+      var cacheGet = _cache.GetOrCreateAsync("Data", entry =>
+      {
+        double valor = 9999;
+        double i = 0;
+        while (i < valor)
+          i++;
+
+        entry.SlidingExpiration = TimeSpan.FromDays(1);
+        return Task.FromResult(Response(DateTime.Now));
+      });
+
+      var ret = new
+      {
+        ValorCache = cacheGet,
+        DataAtual = DateTime.Now
+      };
+
+      return Task.FromResult(Response(ret));
     }
 
     protected new IActionResult Response(object result = null)
