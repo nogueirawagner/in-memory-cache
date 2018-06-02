@@ -10,8 +10,6 @@ Um cache em processo pode afetar negativamente o desempenho de um aplicativo com
 # Confiabilidade
 Um cache em processo faz uso do mesmo espaço de heap que seu programa, portanto, é preciso ter cuidado ao determinar os limites superiores de uso de memória para o cache. Se o seu programa ficar sem memória, não há maneira fácil de se recuperar dele.
 
-
-
 <table style="float: left;">
 <tbody>
 <tr>
