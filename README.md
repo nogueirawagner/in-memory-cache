@@ -58,4 +58,4 @@ Foi utilizado este código abaixo para simular o tempo de resposta de um serviç
 </tbody>
 </table>
  
- Fonte: https://dzone.com/articles/process-caching-vs-distributed
+ Fonte: https://docs.microsoft.com/en-us/dotnet/framework/performance/caching-in-net-framework-applications
